@@ -1,0 +1,83 @@
+.linkWrap {
+    background: #e3ebf9;
+    padding: 20px 28px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 991px) {
+        width: 50%;
+        flex: 0 0 auto;
+    }
+
+    @media (max-width: 767px) {
+        width: 100%;
+        flex: 0 0 auto;
+    }
+
+    .style-2 {
+        align-items: center;
+        text-decoration: none;
+        display: flex;
+        color: #1E2B3E;
+
+        /* Hide extra text */
+        .mask {
+            position: relative;
+            padding: 0;
+            height: 20px;
+            /*  Remove overflow to see how it works　:) */
+            overflow: hidden;
+
+            .link-container {
+                transition: transform 0.4s ease;
+            }
+
+            .title-btn {
+                display: block;
+                /*  Set same font-size and line height  */
+                font-size: 16px;
+                line-height: 20px;
+                transition: transform 0.4s ease;
+            }
+
+            .link-title-btn1 {
+                transform-origin: right center;
+            }
+
+            .link-title-btn2 {
+                transform-origin: left center;
+                transform: rotate(20deg);
+            }
+        }
+
+        &:hover {
+
+            /* Move up two texts (20px = font-size) */
+            .link-container {
+                transform: translateY(-20px);
+            }
+
+            /* Rotate texts a little bit */
+            .link-title-btn1 {
+                transform: rotate(20deg);
+            }
+
+            .link-title-btn2 {
+                transform: rotate(0);
+            }
+
+            /* Move arrows to right */
+            .icon:first-child {
+                transform: translate(40px);
+            }
+
+            .icon:nth-child(2) {
+                transform: translate(0px);
+            }
+        }
+    }
+
+}

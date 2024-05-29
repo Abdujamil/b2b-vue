@@ -1,0 +1,12 @@
+.socials {
+    background-color: #1e2b3e;
+    color: white;
+
+    &__slide {
+        padding: 52px 0;
+
+        .swiper{
+            overflow: visible;
+        }
+    }
+}
