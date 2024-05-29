@@ -35,6 +35,7 @@ const socialSwiper = {
                 :modules="modules" 
                 :slides-per-view="4" 
                 :space-between="16"
+                navigation
                 @swiper="socialSwiper" 
                 @slideChange="onSlideChange"
                 >
@@ -72,7 +73,7 @@ const socialSwiper = {
             </div>
             <div class="socials__buttons">
                 <GreenBtn>Присоединиться →</GreenBtn>
-                <div class="socials__arrows" navigation>
+                <div class="socials__arrows">
                     <div class="swiper-button-prev socials__arrow socials__arrow--left"></div>
                     <div class="swiper-button-next socials__arrow socials__arrow--right"></div>
                 </div>
