@@ -1,0 +1,27 @@
+.b2b {
+  border-bottom: 1px solid #92a3bc;
+  &__container {
+  }
+
+  &__filter-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    margin: 52px 0;
+
+    .btn {
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 12px 20px;
+      border: 1px solid #ddd;
+      border-radius: 32px;
+      margin: 0 12px 12px 0;
+
+      &.active {
+        background-color: #4caf50;
+        color: white;
+      }
+    }
+  }
+}

@@ -5,23 +5,24 @@ import SocialCard from "@/components/UICard/social-card/socialCard.vue";
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-const socialSwiper = {
-    components: {
-        Swiper,
-        SwiperSlide,
-    },
-    setup() {
-        return {
-            onSwiper,
-            onSlideChange,
-            modules: [Pagination, A11y, Navigation],
-        };
-    }
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+const onSwiper = (swiper) => {
+    console.log(swiper);
 };
+
+const onSlideChange = () => {
+    console.log('slide changed');
+};
+
+const modules = [Navigation, Pagination, Scrollbar, A11y];
+
 </script>
 
 <template>
-    <div id="socials" class="socials">
+    <div class="socials">
         <div class="socials__container container">
             <div class="socials__title">
                 <h1 class="socials__title title">Соцсеть для бизнеса</h1>
@@ -31,14 +32,10 @@ const socialSwiper = {
                 </p>
             </div>
             <div class="socials__slide">
-                <swiper 
-                :modules="modules" 
-                :slides-per-view="4" 
-                :space-between="16"
-                navigation
-                @swiper="socialSwiper" 
-                @slideChange="onSlideChange"
-                >
+                <swiper :modules="modules"
+                    :navigation="{ nextEl: '.socials__arrow--right', prevEl: '.socials__arrow--left' }"
+                    :grab-cursor="true" :slides-per-view="4" :space-between="16" @swiper="onSwiper"
+                    @slideChange="onSlideChange">
                     <swiper-slide>
                         <SocialCard />
                     </swiper-slide>
@@ -74,13 +71,20 @@ const socialSwiper = {
             <div class="socials__buttons">
                 <GreenBtn>Присоединиться →</GreenBtn>
                 <div class="socials__arrows">
-                    <div class="swiper-button-prev socials__arrow socials__arrow--left"></div>
-                    <div class="swiper-button-next socials__arrow socials__arrow--right"></div>
+                    <div class="socials__arrow socials__arrow--left">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.41 16.58L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.58Z" fill="white" />
+                        </svg>
+                    </div>
+                    <div class="socials__arrow socials__arrow--right">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.59 16.58L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.58Z" fill="white" />
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <style scoped></style>

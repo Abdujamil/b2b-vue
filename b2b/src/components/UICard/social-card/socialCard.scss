@@ -68,6 +68,10 @@
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         &--left {
             // стили левой стрелки
         }
@@ -75,5 +79,9 @@
         &--right {
             // стили правой стрелки
         }
+    }
+
+    .swiper-button-disabled{
+        opacity: .3;
     }
 }

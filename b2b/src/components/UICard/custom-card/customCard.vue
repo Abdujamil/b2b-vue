@@ -2,39 +2,37 @@
 import CardImg from "@/assets/images/no-img.png";
 import './customCard.scss';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
 import { Swiper, SwiperSlide } from 'swiper/vue';
-const swiperB2b = {
-    components: {
-        Swiper,
-        SwiperSlide,
-    },
-    setup() {
-        return {
-            onSwiper,
-            onSlideChange,
-            modules: [Pagination, A11y],
-        };
-    }
+                    
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+const modules = [Navigation, Pagination, Scrollbar, A11y];
+
+const onSwiper = (swiper) => {
+    console.log(swiper);
+};
+const onSlideChange = () => {
+    console.log('slide change');
 };
 </script>
 
 <template>
     <div class="b2b-card">
         <div class="b2b-card__slide">
-            <div class="swiper b2bslider">
-                <swiper 
-                :modules="modules"
-                :slides-per-view="1"
-                :space-between="50"
+            <Swiper 
+                :modules="modules" 
+                :slides-per-view="1" 
+                :space-between="50" 
                 :pagination="{ clickable: true }"
-                @swiper="swiperB2b"
+                @swiper="onSwiper" 
                 @slideChange="onSlideChange"
-                >
-                    <swiper-slide><img :src="CardImg" alt="img" /></swiper-slide>
-                    <swiper-slide><img :src="CardImg" alt="img" /></swiper-slide>
-                    <swiper-slide><img :src="CardImg" alt="img" /></swiper-slide>
-                </swiper>
-            </div>
+            >
+                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
+                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
+                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
+            </Swiper>
         </div>
         <div class="b2b-card__title">
             <h3>Высокопрочная кабельная труба спиральная многок...</h3>

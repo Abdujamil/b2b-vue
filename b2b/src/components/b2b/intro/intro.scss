@@ -1,0 +1,139 @@
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e2b3e;
+  background-image: url('~@/assets/images/backImgHome.svg');
+  background-repeat: no-repeat;
+  background-position: 358px;
+  color: #fff;
+
+  &__container {
+    padding-top: 32px;
+  }
+
+  &__header,
+  &__left,
+  &__btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__header {
+    padding-bottom: 100px;
+  }
+
+  &__left {
+    width: 100%;
+    max-width: 236px;
+  }
+
+  &__btns {
+    width: 100%;
+    max-width: 316px;
+  }
+
+  &__logo-link {
+    img {
+      width: 68px;
+      height: 68px;
+    }
+  }
+
+  &__catalog {
+    .button {
+      background-color: transparent;
+      border: white 1px solid;
+      padding: 18px 20px;
+      border-radius: 8px;
+      color: white;
+      font-size: 18px;
+      line-height: 20px;
+      margin-left: 24px;
+      cursor: pointer;
+
+      img {
+        margin-right: 11px;
+      }
+    }
+  }
+
+  &__search-box {
+    position: relative;
+    width: 100%;
+    max-width: 660px;
+
+    input {
+      width: 100%;
+      height: 100%;
+      outline: none;
+      font-weight: 400;
+      background-color: transparent;
+      font-size: 1em;
+      color: #1e2b3e;
+
+      background: #fff;
+      padding: 18px 20px;
+      border-radius: 8px;
+      border: 1px solid #d7e2f2;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__login-icon {
+    img {
+      width: 20px;
+      height: 19px;
+    }
+  }
+
+  .button--search {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 52px;   
+    padding-bottom: 120px; 
+}
+
+  &__title {
+    h1 {
+      font-size: 4em;
+      line-height: 68px;
+      font-family: 'Inter-ExtraBold';
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    height: 100%;
+
+    .button__link:first-child{
+        background-color: #00b066;
+        margin-right: 16px;
+        border-color: #00b066 ;
+    }
+
+    .button__link {
+      padding: 20px 28px;
+      background-color: transparent;
+      border: white 1px solid;
+      border-radius: 8px;
+    }
+  }
+}
