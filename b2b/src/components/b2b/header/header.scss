@@ -15,21 +15,58 @@
       display: flex;
 
       .menu__item {
-        list-style: none;
         padding: 20px 24px 20px 0px;
+
+
+        @media (max-width: 1080px) {
+          padding: 20px 14px 20px 0px;
+
+          
+        }
 
         .menu__link {
           text-decoration: none;
           color: #92a3bc;
           transition: all 0.3s ease-in-out;
           font-size: 14px;
+          position: relative;
+
+          svg {
+            width: 12px;
+            height: 12px;
+            display: inherit;
+            margin-left: 8px;
+          }
         }
 
         .menu__link:hover {
           color: #fff;
         }
+
       }
     }
+
+    .dropdown {
+      display: inline-flex;
+      align-items: center;
+      color: #92a3bc;
+      background: transparent;
+      border: none;
+
+      span {
+        color: #92a3bc;
+        text-decoration: none;
+        background-color: transparent !important;
+        font-family: "Inter-SemiBold";
+        font-size: 14px;
+      }
+
+    }
+
+    .p-dropdown-item-label {
+      background-color: transparent !important;
+    }
+
   }
 
   &__btn-join {
@@ -57,7 +94,6 @@
 .menu {
   &__item {
     list-style: none;
-    padding: 20px 24px 20px 0px;
 
     &__link {
       text-decoration: none;
