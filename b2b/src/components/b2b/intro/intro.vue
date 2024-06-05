@@ -1,21 +1,26 @@
 <script setup>
 import { ref } from 'vue';
 
-import logo from '@/assets/images/logo.svg'
-import search from '@/assets/images/search.svg';
-import loginIcon from '@/assets/images/loginIcon.svg';
-import favorites from '@/assets/images/favorites.svg';
-import deals from '@/assets/images/deals.svg';
-import catalogIcon from '@/assets/images/catalogIcon.svg';
-import arrhover from '@/assets/images/arrhover.svg';
-import fulfilment from '@/assets/images/fulfilment.svg'
-import slideCard from '@/components/UICard/slider-card/sliderCard.vue'
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
+
+import fulfilmentSvg from '@/assets/images/fulfilment.svg'
+import birzhaSvg from '@/assets/images/birzhaSvg.svg'
+import electronTorgSvg from '@/assets/images/electronTorgSvg.svg'
+import impotSvg from '@/assets/images/impotSvg.svg'
+import birzhaFrilanceSvg from '@/assets/images/birzhaFrilanceSvg.svg'
+import socialBuisnessSvg from '@/assets/images/socialBuisnessSvg.svg'
+import b2bSvg from '@/assets/images/b2bSvg.svg'
+import LearnMoreSvg from '@/assets/images/LearnMoreSvg.svg'
+
+import slideCard from '@/components/UICard/slider-card/sliderCard.vue'
+import IntroHead from '@/components/b2b/intro/intro-header/intro-header.vue';
+import introCard from '@/components/b2b/intro/intro-card/introCard.vue';
+
 
 const onSwiper = (swiper) => {
     console.log(swiper);
@@ -33,45 +38,9 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
 <template>
     <div class="intro">
         <div class="intro__container container">
-            <div class="intro__header">
-                <div class="intro__left">
-                    <a href="#" class="intro__logo-link">
-                        <img class="intro__logo" :src="logo" alt="logo" />
-                    </a>
-                    <div class="intro__catalog">
-                        <a class="button button--catalog">
-                            <img :src="catalogIcon" alt="catalogIcon" class="intro__catalog-icon" />Каталог
-                        </a>
-                    </div>
-                </div>
-                <div class="intro__search-box">
-                    <input type="text" class="intro__search-input" placeholder="Поиск для бизнеса" />
-                    <a class="button button--search">
-                        <img :src='search' alt="search" class="intro__search-icon" />
-                    </a>
-                </div>
-                <div class="intro__btns">
-                    <div class="intro__btn intro__login">
-                        <div class="intro__login-icon">
-                            <img :src="loginIcon" alt="loginIcon" />
-                        </div>
-                        <a id="login" class="button button--login">Войти</a>
-                    </div>
-                    <div class="intro__btn intro__favorites">
-                        <div class="intro__favorites-icon">
-                            <img :src="favorites" alt="favorites" />
-                        </div>
-                        <a id="favorites" class="button button--favorites">Избранное</a>
-                    </div>
-                    <div class="intro__btn intro__deals">
-                        <div class="intro__deals-icon">
-                            <img :src="deals" alt="deals" />
-                        </div>
-                        <a id="deals" class="button button--deals">Сделки</a>
-                    </div>
-                </div>
-            </div>
 
+            <IntroHead />
+            
             <div class="intro__body">
                 <div class="intro__title">
                     <h1 class="intro__title-text">
@@ -86,8 +55,8 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
                 </div>
             </div>
 
-
             <div class="intro__slider">
+                
                 <div class="home__slider-header">
                     <h1 class="home__slider-title title">Что мы предлагаем?</h1>
                     <p class="home__slider-subtitle subtitle">Инструмент для решения каждодневных задач.</p>
@@ -99,134 +68,58 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
                 :grab-cursor="true" 
                 :slides-per-view="3" 
                 :space-between="16" 
-                @swiper="onSwiper"
+                @swiper="onSwiper" 
                 @slideChange="onSlideChange"
                 >
                     <swiper-slide>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M59.93 78.3867C57.5033 79.2733 54.82 78.0134 53.9333 75.61C53 73.1834 54.2833 70.5 56.71 69.6367C59.1367 68.75 61.82 69.9867 62.7067 72.39C63.5933 74.8167 62.3333 77.5 59.93 78.3867ZM55.1 65.25C50.27 67 47.7733 72.3667 49.5 77.22C51.32 82.05 56.6867 84.5 61.54 82.75C66.37 81 68.8433 75.6334 67.0933 70.8034C65.32 65.95 59.93 63.5 55.1 65.25ZM69.1933 42.6867L53.8633 48.3334L57.0833 57.06L72.4133 51.4367L69.1933 42.6867ZM79.4133 63.78L68.26 67.8634C68.6567 68.54 68.9833 69.24 69.2633 69.9867C69.5433 70.7334 69.73 71.5034 69.8467 72.25L81 68.1667L79.4133 63.78ZM77.5933 52.02L57.8767 59.2534L59.02 62.3334C61.9367 62.5434 64.6667 63.8267 66.7433 65.95L80.8133 60.7934L77.5933 52.02ZM36.6667 36.6667V41.3334H43.8767L52.2067 64.0834C52.86 63.6634 53.56 63.3367 54.3067 63.0567C55.0533 62.7767 55.8233 62.59 56.57 62.4734L47.1667 36.6667"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Фулфилмент</h2>
-                            <p class="card__description">Размещайте свои товары на наших складах</p>
-                        </div>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M33.75 49.5H56.5L58.25 53H35.5L33.75 49.5ZM36.0833 56.5H58.8333L60.5833 60H37.8333L36.0833 56.5ZM74 75.1667C75.9367 75.1667 77.5 73.6034 77.5 71.6667C77.5 69.73 75.9367 68.1667 74 68.1667C72.0633 68.1667 70.5 69.73 70.5 71.6667C70.5 73.6034 72.0633 75.1667 74 75.1667ZM77.5 54.1667H71.6667V60H82.0733L77.5 54.1667ZM50.6667 75.1667C52.6033 75.1667 54.1667 73.6034 54.1667 71.6667C54.1667 69.73 52.6033 68.1667 50.6667 68.1667C48.73 68.1667 47.1667 69.73 47.1667 71.6667C47.1667 73.6034 48.73 75.1667 50.6667 75.1667ZM78.6667 50.6667L85.6667 60V71.6667H81C81 75.54 77.8733 78.6667 74 78.6667C70.1267 78.6667 67 75.54 67 71.6667H57.6667C57.6667 75.54 54.5167 78.6667 50.6667 78.6667C46.7933 78.6667 43.6667 75.54 43.6667 71.6667H39V63.5H43.6667V67H45.44C46.7233 65.5767 48.59 64.6667 50.6667 64.6667C52.7433 64.6667 54.61 65.5767 55.8933 67H67V46H39C39 43.41 41.0767 41.3334 43.6667 41.3334H71.6667V50.6667H78.6667Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Биржа грузоперевозок</h2>
-                            <p class="card__description">Перевозка и доставка груза по России</p>
-                        </div>
+                        <introCard
+                        :image="fulfilmentSvg"
+                        title="Фулфилмент"
+                        description="Размещайте свои товары на наших складах"
+                        />
+                        <introCard
+                        :image="birzhaSvg"
+                        title="Биржа грузоперевозок"
+                        description="Перевозка и доставка груза по России"
+                        />
                     </swiper-slide>
                     <swiper-slide>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="132" height="132" viewBox="0 0 132 132" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px; position: relative;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="66" cy="66" r="66" fill="#00B066"></circle>
-                                <path
-                                    d="M45.18 39C43.89 39 42.66 39.42 41.52 40.26C40.38 41.1 39.72 42.18 39.42 43.5L36.33 56.73C35.58 60 36.18 62.85 38.16 65.31L39 66.15V87C39 88.5 39.6 90 40.83 91.17C42.06 92.34 43.5 93 45 93H87C88.5 93 90 92.4 91.17 91.17C92.34 89.94 93 88.5 93 87V66.15L93.84 65.31C95.82 62.85 96.42 60 95.67 56.73L92.58 43.5C92.19 42.18 91.5 41.1 90.39 40.26C89.31 39.42 88.14 39 86.82 39H45.18ZM86.67 44.91L89.91 58.14C90.18 59.43 89.91 60.6 89.07 61.65C88.32 62.58 87.39 63 86.25 63C85.32 63 84.51 62.7 83.85 61.98C83.19 61.29 82.83 60.48 82.74 59.52L80.91 45L86.67 44.91ZM45.18 45H51.09L49.26 59.52C48.9 61.89 47.73 63 45.75 63C44.52 63 43.59 62.58 42.93 61.65C42.09 60.6 41.82 59.43 42.09 58.14L45.18 45ZM57.15 45H63V59.1C63 60.15 62.67 61.05 61.92 61.86C61.17 62.64 60.24 63 59.1 63C58.08 63 57.21 62.64 56.52 61.77C55.83 60.9 55.5 60 55.5 58.98V58.5L57.15 45ZM69 45H74.85L76.5 58.5C76.74 59.76 76.5 60.81 75.63 61.71C74.85 62.61 73.83 63 72.6 63C71.67 63 70.83 62.64 70.08 61.86C69.33 61.05 69 60.15 69 59.1V45ZM52.35 66.15C54.24 68.01 56.58 69 59.4 69C61.92 69 64.14 68.01 66 66.15C68.07 68.01 70.35 69 72.9 69C75.51 69 77.76 68.01 79.65 66.15C81.33 68.01 83.58 69 86.4 69H87.09V87H45V69H45.75C48.48 69 50.67 68.01 52.35 66.15Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">B2B Рынок</h2>
-                            <p class="card__description">Купля / продажа товаров. Только для юридических лиц</p>
-                        </div>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M57.6667 46.0001H64.6667L72.3433 38.3001C72.5603 38.0814 72.8183 37.9078 73.1027 37.7893C73.387 37.6709 73.692 37.6099 74 37.6099C74.308 37.6099 74.613 37.6709 74.8973 37.7893C75.1817 37.9078 75.4398 38.0814 75.6567 38.3001L81.6767 44.3434C82.1113 44.7806 82.3552 45.372 82.3552 45.9884C82.3552 46.6048 82.1113 47.1962 81.6767 47.6334L76.3333 53.0001H57.6667V57.6667C57.6667 58.2856 57.4208 58.8791 56.9833 59.3166C56.5457 59.7542 55.9522 60.0001 55.3333 60.0001C54.7145 60.0001 54.121 59.7542 53.6834 59.3166C53.2458 58.8791 53 58.2856 53 57.6667V50.6667C53 49.429 53.4917 48.2421 54.3668 47.3669C55.242 46.4917 56.429 46.0001 57.6667 46.0001ZM43.6667 57.6667V67.0001L38.3233 72.3434C37.8888 72.7806 37.6448 73.372 37.6448 73.9884C37.6448 74.6048 37.8888 75.1962 38.3233 75.6334L44.3433 81.6767C44.5603 81.8954 44.8183 82.069 45.1027 82.1875C45.387 82.3059 45.692 82.3669 46 82.3669C46.308 82.3669 46.613 82.3059 46.8973 82.1875C47.1817 82.069 47.4398 81.8954 47.6567 81.6767L57.6667 71.6667H67C67.6188 71.6667 68.2123 71.4209 68.6499 70.9833C69.0875 70.5457 69.3333 69.9522 69.3333 69.3334V67.0001H71.6667C72.2855 67.0001 72.879 66.7542 73.3166 66.3166C73.7542 65.8791 74 65.2856 74 64.6667V62.3334H76.3333C76.9522 62.3334 77.5457 62.0876 77.9833 61.65C78.4208 61.2124 78.6667 60.6189 78.6667 60.0001V57.6667H62.3333V60.0001C62.3333 61.2377 61.8417 62.4247 60.9665 63.2999C60.0913 64.1751 58.9043 64.6667 57.6667 64.6667H53C51.7623 64.6667 50.5753 64.1751 49.7002 63.2999C48.825 62.4247 48.3333 61.2377 48.3333 60.0001V53.0001L43.6667 57.6667Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Биржа фриланса</h2>
-                            <p class="card__description">Находите исполнителей и заказчиков. Безопасные сделки</p>
-                        </div>
+                        <introCard
+                        :image="b2bSvg"
+                        title="Фулфилмент"
+                        description="Размещайте свои товары на наших складах"
+                        />
+                        <introCard
+                        :image="birzhaFrilanceSvg"
+                        title="Биржа грузоперевозок"
+                        description="Перевозка и доставка груза по России"
+                        />
                     </swiper-slide>
                     <swiper-slide>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M37.3667 79.32L59.7667 56.92L56.5 53.6067L54.82 55.2633C53.91 56.1733 52.44 56.1733 51.53 55.2633L49.8733 53.6067C48.9633 52.6967 48.9633 51.2267 49.8733 50.3167L63.08 37.11C63.99 36.2 65.46 36.2 66.37 37.11L68.0267 38.7667C68.9367 39.6767 68.9367 41.1467 68.0267 42.0567L66.37 43.6667L69.6833 47.0033C70.5933 46.0933 72.0633 46.0933 72.9733 47.0033C73.8833 47.9133 73.8833 49.4067 72.9733 50.3167L76.2633 53.6067L77.92 51.95C78.83 51.04 80.3233 51.04 81.2333 51.95L82.8667 53.6067C83.7767 54.5167 83.7767 56.01 82.8667 56.92L69.6833 70.1033C68.7733 71.0133 67.28 71.0133 66.37 70.1033L64.7367 68.47C63.8033 67.56 63.8033 66.0667 64.7367 65.1567L66.37 63.5L63.08 60.21L40.6567 82.6333C39.7467 83.5433 38.2767 83.5433 37.3667 82.6333C36.4567 81.7233 36.4567 80.23 37.3667 79.32ZM78.6667 76.3333C79.9044 76.3333 81.0913 76.825 81.9665 77.7002C82.8417 78.5753 83.3333 79.7623 83.3333 81V83.3333H60V81C60 79.7623 60.4917 78.5753 61.3668 77.7002C62.242 76.825 63.429 76.3333 64.6667 76.3333H78.6667Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Электронные торги</h2>
-                            <p class="card__description">Оперативная купля / продажа по выгодным оптовым ценам</p>
-                        </div>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M46 46H74V55.24L60 50.6667L46 55.24V46ZM41.1933 76.3334H41.3333C45.0667 76.3334 48.3333 74.28 50.6667 71.6667C53 74.28 56.2667 76.3334 60 76.3334C63.7333 76.3334 67 74.28 69.3333 71.6667C71.6667 74.28 74.9333 76.3334 78.6667 76.3334H78.7833L83.2167 60.7234C83.4033 60.14 83.3333 59.4867 83.0767 58.9267C82.7733 58.3667 82.2833 57.9467 81.6767 57.76L78.6667 56.78V46C78.6667 43.41 76.5667 41.3334 74 41.3334H67V34.3334H53V41.3334H46C44.7623 41.3334 43.5753 41.825 42.7002 42.7002C41.825 43.5754 41.3333 44.7624 41.3333 46V56.78L38.3233 57.76C37.7167 57.9467 37.2267 58.3667 36.9233 58.9267C36.6667 59.4867 36.5967 60.14 36.7833 60.7234L41.1933 76.3334ZM78.6667 81C75.4233 81 72.18 79.9034 69.3333 77.8967C63.64 81.8867 56.36 81.8867 50.6667 77.8967C47.82 79.9034 44.5767 81 41.3333 81H36.6667V85.6667H41.3333C44.53 85.6667 47.7267 84.85 50.6667 83.3334C56.5 86.3667 63.5 86.3667 69.3333 83.3334C72.2733 84.85 75.4467 85.6667 78.6667 85.6667H83.3333V81H78.6667Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Импортозамещение</h2>
-                            <p class="card__description"> Покупайте у иностранных поставщиков с иностранных складов</p>
-                        </div>
+                        <introCard
+                        :image="electronTorgSvg"
+                        title="Фулфилмент"
+                        description="Размещайте свои товары на наших складах"
+                        />
+                        <introCard
+                        :image="impotSvg"
+                        title="Биржа грузоперевозок"
+                        description="Перевозка и доставка груза по России"
+                        />
                     </swiper-slide>
                     <swiper-slide>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path
-                                    d="M62.4967 56.29C63.9141 54.3096 64.6762 51.9353 64.6762 49.5C64.6762 47.0646 63.9141 44.6904 62.4967 42.71C63.8232 41.8045 65.394 41.3244 67 41.3333C69.166 41.3333 71.2432 42.1937 72.7747 43.7253C74.3063 45.2568 75.1667 47.334 75.1667 49.5C75.1667 51.6659 74.3063 53.7431 72.7747 55.2747C71.2432 56.8062 69.166 57.6666 67 57.6666C65.394 57.6756 63.8232 57.1954 62.4967 56.29ZM44.8334 49.5C44.8334 47.8848 45.3123 46.3058 46.2097 44.9628C47.107 43.6198 48.3825 42.5731 49.8748 41.955C51.367 41.3368 53.0091 41.1751 54.5933 41.4902C56.1774 41.8053 57.6326 42.5831 58.7747 43.7253C59.9169 44.8674 60.6947 46.3226 61.0098 47.9067C61.3249 49.4909 61.1632 51.133 60.545 52.6252C59.9269 54.1175 58.8802 55.393 57.5372 56.2903C56.1942 57.1877 54.6152 57.6666 53 57.6666C50.8341 57.6666 48.7569 56.8062 47.2253 55.2747C45.6938 53.7431 44.8334 51.6659 44.8334 49.5ZM49.5 49.5C49.5 50.1922 49.7053 50.8689 50.0899 51.4445C50.4745 52.02 51.0211 52.4687 51.6606 52.7336C52.3002 52.9985 53.0039 53.0678 53.6828 52.9327C54.3618 52.7977 54.9854 52.4643 55.4749 51.9749C55.9644 51.4854 56.2977 50.8617 56.4328 50.1828C56.5678 49.5039 56.4985 48.8001 56.2336 48.1606C55.9687 47.521 55.5201 46.9744 54.9445 46.5898C54.3689 46.2053 53.6923 46 53 46C52.0718 46 51.1815 46.3687 50.5251 47.0251C49.8688 47.6815 49.5 48.5717 49.5 49.5ZM69.3334 71.6666V76.3333H36.6667V71.6666C36.6667 71.6666 36.6667 62.3333 53 62.3333C69.3334 62.3333 69.3334 71.6666 69.3334 71.6666ZM64.6667 71.6666C64.34 69.8466 61.5634 67 53 67C44.4367 67 41.4967 70.0566 41.3334 71.6666H64.6667ZM69.2167 62.3333C70.6468 63.4457 71.8161 64.8576 72.6424 66.47C73.4688 68.0824 73.9322 69.8561 74 71.6666V76.3333H83.3334V71.6666C83.3334 71.6666 83.3334 63.1966 69.1934 62.3333H69.2167Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Соцсеть для бизнеса</h2>
-                            <p class="card__description">Станьте участником крупнейшей сети B2B сообщества</p>
-                        </div>
-                        <div class="card intro__card">
-                            <img class="arrhover" :src='arrhover' alt="arrhover" />
-                            <svg width="120" height="120" viewBox="0 0 120 120" fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                                style="flex-grow: 0; flex-shrink: 0; width: 120px; height: 120px;"
-                                preserveAspectRatio="none">
-                                <circle opacity="0.05" cx="60" cy="60" r="60" fill="#00B066"></circle>
-                                <path d="M57.3167 62.3333H62.058L62.6833 57.6666H57.942L57.3167 62.3333Z"
-                                    fill="#00B066"></path>
-                                <path
-                                    d="M36.0966 78.6188C37.4244 80.1331 39.3447 81 41.3638 81L53.486 81C56.9851 81 59.9932 78.3664 60.4431 74.8769L60.8422 70.8262L56.1237 70.8262L55.8014 74.2844C55.6477 75.4475 54.6368 76.3254 53.486 76.3254L41.3528 76.3254C40.6724 76.3254 40.047 76.0401 39.5971 75.5353C39.1471 75.0196 38.9496 74.3721 39.0374 73.6918L41.0026 57.8536C41.1562 56.6905 42.1438 55.8126 43.3179 55.8126L55.8256 55.8126L58.13 55.8126L60.5152 55.8126L63.1159 55.8126L68.0728 55.8126L67.8423 57.7658C67.7216 58.8083 68.8957 59.3679 69.7517 58.6547L74.964 54.3641C75.5456 53.8813 75.6443 53.0583 75.1725 52.5864L70.9807 48.2959C70.2894 47.5936 68.9835 48.1423 68.8519 49.1847L68.6214 51.138L64.1473 51.138L61.1077 51.138L58.7226 51.138L56.8461 51.138L43.307 51.138C39.7845 51.138 36.7998 53.7716 36.3499 57.2611L34.3848 73.0883C34.1433 75.0854 34.7578 77.1045 36.0966 78.6188Z"
-                                    fill="#00B066"></path>
-                                <path
-                                    d="M83.8938 41.3812C82.566 39.8669 80.6457 39 78.6266 39H66.5044C63.0053 39 59.9972 41.6336 59.5473 45.1231L59.1482 49.1738H63.8667L64.189 45.7156C64.3426 44.5525 65.3536 43.6746 66.5044 43.6746H78.6376C79.3179 43.6746 79.9434 43.9599 80.3933 44.4647C80.8432 44.9804 81.0407 45.6279 80.9529 46.3082L78.9878 62.1464C78.8342 63.3095 77.8466 64.1874 76.6724 64.1874H64.1647H61.8603H59.4752H56.8745H51.9176L52.148 62.2342C52.2687 61.1917 51.0946 60.6321 50.2387 61.3453L45.0264 65.6359C44.4448 66.1187 44.346 66.9417 44.8179 67.4135L49.0097 71.7041C49.701 72.4064 51.0068 71.8577 51.1385 70.8153L51.3689 68.862H55.843H58.8826H61.2678H63.1442H76.6834C80.2058 68.862 83.1906 66.2284 83.6405 62.7389L85.6056 46.9117C85.847 44.9146 85.2325 42.8955 83.8938 41.3812Z"
-                                    fill="#00B066"></path>
-                            </svg>
-                            <h2 class="card__title">Узнать больше</h2>
-                            <p class="card__description">Нужно что-то написать кратко о нас и сервисе?</p>
-                        </div>
+                        <introCard
+                        :image="socialBuisnessSvg"
+                        title="Фулфилмент"
+                        description="Размещайте свои товары на наших складах"
+                        />
+                        <introCard
+                        :image="LearnMoreSvg"
+                        title="Биржа грузоперевозок"
+                        description="Перевозка и доставка груза по России"
+                        />
                     </swiper-slide>
+
                     <div class="intro__swiper-button-next">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
                             style="flex-grow: 0; flex-shrink: 0; width: 32px; height: 32px; position: relative;"
@@ -246,6 +139,7 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
                         </svg>
                     </div>
                 </swiper>
+
             </div>
         </div>
     </div>

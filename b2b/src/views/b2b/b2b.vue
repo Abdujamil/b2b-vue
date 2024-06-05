@@ -13,13 +13,13 @@ import Intro from '@/components/b2b/intro/intro.vue';
 <template>
     <Header />
     <Intro />
-    <B2bBlock />
+    <!-- <B2bBlock />
     <ElectronBlock />
     <SocailBlock />
     <BirazhaBlock />
     <PartnersBlock />
     <ContactFormBlock />
-    <Footer />
+    <Footer /> -->
 </template>
 
 <style scoped></style>

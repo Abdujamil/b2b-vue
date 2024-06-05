@@ -31,7 +31,11 @@
 
   &__btns {
     width: 100%;
-    max-width: 316px;
+    max-width: 270px;
+
+    a {
+      font-size: .9em;
+    }
   }
 
   &__logo-link {
@@ -45,10 +49,10 @@
     .button {
       background-color: transparent;
       border: white 1px solid;
-      padding: 18px 20px;
+      padding: 17px 20px;
       border-radius: 8px;
       color: white;
-      font-size: 18px;
+      font-size: 1.1em;
       line-height: 20px;
       margin-left: 24px;
       cursor: pointer;
@@ -62,7 +66,8 @@
   &__search-box {
     position: relative;
     width: 100%;
-    max-width: 660px;
+    max-width: 680px;
+    padding: 0 10px;
 
     input {
       width: 100%;
@@ -137,6 +142,11 @@
     }
   }
 
+  &__cat,
+  &__home {
+    display: none;
+  }
+
   // Swiper
   &__slider {
 
@@ -145,7 +155,7 @@
       overflow: visible;
     }
 
-    .swiper-button-disabled{
+    .swiper-button-disabled {
       opacity: 0;
     }
   }
@@ -179,7 +189,7 @@
       transition: opacity .3s ease-in-out;
     }
 
-    svg{
+    img {
       margin-bottom: 24px;
       transition: transform .3s ease-in-out;
     }
@@ -202,11 +212,11 @@
 
   &__card:hover {
 
-    .arrhover{
+    .arrhover {
       opacity: 1;
     }
 
-    svg{
+    img {
       transform: scale(1.1);
     }
   }
@@ -226,20 +236,74 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    
+
   }
 
-  &__swiper-button-next{
+  &__swiper-button-next {
     right: -22px;
     top: 42%;
   }
 
-  &__swiper-button-prev{
+  &__swiper-button-prev {
     left: -22px;
   }
 
   .opacity-slide {
     opacity: 0.6;
   }
-  
+
+
+  @media (max-width: 1080px) {
+
+    &__left,
+    &__btns {
+      max-width: 220px;
+    }
+
+    &__catalog {
+      .button {
+        margin-left: 10px;
+
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    &__left {
+      max-width: fit-content;
+    }
+
+    &__btns {
+      max-width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: #1e2b3e;
+      flex-direction: row-reverse;
+      z-index: 99999;
+      padding: 12px 32px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &__cat,
+    &__home {
+      display: block;
+    }
+
+    &__catalog {
+      display: none;
+    }
+
+    &__search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .button--search {
+      right: 15%;
+    }
+  }
+
 }
