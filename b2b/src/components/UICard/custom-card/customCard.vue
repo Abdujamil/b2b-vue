@@ -10,16 +10,17 @@ import 'swiper/css/pagination';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-const onSlideChange = () => {
-    console.log('slide change');
-};
+defineProps({
+    customCard: {
+        type: Object,
+        required: true
+    }
+});
+
 </script>
 
 <template>
-    <div class="b2b-card">
+    <div class="b2b-card " v-if="customCard">
         <div class="b2b-card__slide">
             <Swiper 
                 :modules="modules" 
@@ -35,11 +36,11 @@ const onSlideChange = () => {
             </Swiper>
         </div>
         <div class="b2b-card__title">
-            <h3>Высокопрочная кабельная труба спиральная многок...</h3>
-            <p>ООО «Восток»</p>
+            <h3>{{  typeof(customCard.alias_ru-RU) }}</h3>
+            <p>{{ typeof(customCard.description_ru-RU) }}</p>
         </div>
         <div class="b2b-card__card-price">
-            <h3>890 ₽ <span>9 564 ₽</span></h3>
+            <h3>{{ customCard.product_price }} ₽<span>{{ customCard.product_old_price }}₽</span></h3>
             <p>за 1 м</p>
         </div>
         <div class="b2b-card__card-km">

@@ -1,8 +1,36 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import CustomCard from '@/components/UICard/custom-card/customCard.vue';
 import CustomBtn from '@/components/UIbuttons/customBtn/customBtn.vue';
 import './b2b.scss'
+import axios from 'axios';
+
+
+const cards = ref([]);
+const loading = ref(true);
+
+const fetchData = async () => {
+    try {
+        const response = await axios.request({
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
+            headers: {
+                'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
+                'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
+            }
+        });
+        cards.value = response.data;
+    } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+    } finally {
+        loading.value = false;
+    }
+};
+
+onMounted(() => {
+    fetchData();
+});
 
 const maxVisibleButtons = ref(12);
 const buttons = ref([
@@ -74,14 +102,7 @@ function setActiveButton(button) {
             </div>
 
             <div class="b2b-cards">
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
-                <CustomCard />
+                <CustomCard v-for="card in cards" :key="card.id" :customCard="card" />
             </div>
             <CustomBtn :href="birzhaLink" />
         </div>

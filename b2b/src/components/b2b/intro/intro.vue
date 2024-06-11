@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import axios from 'axios';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,17 +22,33 @@ import slideCard from '@/components/UICard/slider-card/sliderCard.vue'
 import IntroHead from '@/components/b2b/intro/intro-header/intro-header.vue';
 import introCard from '@/components/b2b/intro/intro-card/introCard.vue';
 
-
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-
-const onSlideChange = () => {
-    console.log('slide changed');
-};
-
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
+const cards = ref([]);
+const loading = ref(true);
+
+const fetchData = async () => {
+    try {
+        const response = await axios.request({
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
+            headers: {
+                'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
+                'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
+            }
+        });
+        cards.value = response.data;
+    } catch (error) {
+        console.error('Ошибка при загрузке данных:', error);
+    } finally {
+        loading.value = false;
+    }
+};
+
+onMounted(() => {
+    fetchData();
+});
 
 </script>
 
@@ -40,7 +57,7 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
         <div class="intro__container container">
 
             <IntroHead />
-            
+
             <div class="intro__body">
                 <div class="intro__title">
                     <h1 class="intro__title-text">
@@ -56,19 +73,22 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
             </div>
 
             <div class="intro__slider">
-                
+
                 <div class="home__slider-header">
                     <h1 class="home__slider-title title">Что мы предлагаем?</h1>
                     <p class="home__slider-subtitle subtitle">Инструмент для решения каждодневных задач.</p>
                 </div>
 
                 <swiper 
-                :modules="modules"
-                :navigation="{ nextEl: '.intro__swiper-button-next', prevEl: '.intro__swiper-button-prev' }"
-                :grab-cursor="true" 
-                :slides-per-view="3" 
-                :space-between="16" 
-                @swiper="onSwiper" 
+                    :modules="modules"
+                    :navigation="{ 
+                        nextEl: '.intro__swiper-button-next', 
+                        prevEl: '.intro__swiper-button-prev' 
+                    }"
+                    :grab-cursor="true" 
+                    :slides-per-view="3" 
+                    :space-between="16" 
+                    @swiper="onSwiper"
                 @slideChange="onSlideChange"
                 >
                     <swiper-slide>
