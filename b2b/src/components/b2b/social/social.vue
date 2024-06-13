@@ -9,14 +9,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-const onSwiper = (swiper) => {
-    console.log(swiper);
-};
-
-const onSlideChange = () => {
-    console.log('slide changed');
-};
-
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
 </script>
@@ -34,8 +26,10 @@ const modules = [Navigation, Pagination, Scrollbar, A11y];
             <div class="socials__slide">
                 <swiper :modules="modules"
                     :navigation="{ nextEl: '.socials__arrow--right', prevEl: '.socials__arrow--left' }"
-                    :grab-cursor="true" :slides-per-view="4" :space-between="16" @swiper="onSwiper"
-                    @slideChange="onSlideChange">
+                    :grab-cursor="true" 
+                    :slides-per-view="4" 
+                    :space-between="16" 
+                    >
                     <swiper-slide>
                         <SocialCard />
                     </swiper-slide>

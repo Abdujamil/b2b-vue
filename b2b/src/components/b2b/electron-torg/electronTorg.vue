@@ -3,12 +3,16 @@ import { ref } from "vue";
 import "./electronTorg.scss"
 import CustomBtn from '@/components/UIbuttons/customBtn/customBtn.vue'
 import AuctionCard from '@/components/UICard/auction-card/auction-card.vue'
+
+const birzhaLink = '#';
+
 // Button change
 const activeButton = ref('all');
 
 function setActiveButton(button) {
     activeButton.value = button;
 }
+
 </script>
 
 <template>

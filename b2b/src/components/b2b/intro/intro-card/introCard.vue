@@ -3,15 +3,15 @@ import { defineProps } from 'vue';
 import arrhover from '@/assets/images/arrhover.svg';
 import axios from 'axios';
 
-let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
-    headers: {
-        'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
-        'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
-    }
-};
+// let config = {
+//     method: 'get',
+//     maxBodyLength: Infinity,
+//     url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
+//     headers: {
+//         'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
+//         'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
+//     }
+// };
 
 // axios.request(config)
 // .then((response) => {
@@ -29,9 +29,9 @@ let config = {
 // });
 
 
-axios
-    .request(config)
-    .then(response => console.log((response.data.result)))
+// axios
+//     .request(config)
+//     .then(response => console.log((response.data.result)))
 
 
 // defineProps({

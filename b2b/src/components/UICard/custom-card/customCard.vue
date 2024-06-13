@@ -4,7 +4,7 @@ import './customCard.scss';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
-                    
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -23,12 +23,10 @@ defineProps({
     <div class="b2b-card " v-if="customCard">
         <div class="b2b-card__slide">
             <Swiper 
-                :modules="modules" 
-                :slides-per-view="1" 
-                :space-between="50" 
-                :pagination="{ clickable: true }"
-                @swiper="onSwiper" 
-                @slideChange="onSlideChange"
+            :modules="modules" 
+            :slides-per-view="1" 
+            :space-between="50" 
+            :pagination="{ clickable: true }"
             >
                 <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
                 <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
@@ -36,8 +34,8 @@ defineProps({
             </Swiper>
         </div>
         <div class="b2b-card__title">
-            <h3>{{  typeof(customCard.alias_ru-RU) }}</h3>
-            <p>{{ typeof(customCard.description_ru-RU) }}</p>
+            <h3>{{ customCard.alias_ru_RU }}</h3>
+            <p>{{ customCard.description_ru_RU }}</p>
         </div>
         <div class="b2b-card__card-price">
             <h3>{{ customCard.product_price }} ₽<span>{{ customCard.product_old_price }}₽</span></h3>
