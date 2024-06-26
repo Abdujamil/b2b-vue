@@ -103,15 +103,11 @@ const birzhaLink = 'https://market.b2b-se.com/';
                      {{ category['name_ru-RU']  }}
                 </button>
 
-<<<<<<< HEAD
                 <!-- <button 
                 v-if="hasMoreButtons && !showAll" 
                 class="btn showMoreBtn" 
                 @click="toggleShowAll"
                 >
-=======
-                <button v-if="hasMoreButtons && !showAll" class="btn showMoreBtn" @click="toggleShowAll">
->>>>>>> 9ebee8bc8be38655f355cacae6fd1931254d89af
                     Показать еще...
                 </button>
 
