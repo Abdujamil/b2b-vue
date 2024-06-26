@@ -50,6 +50,49 @@ onMounted(() => {
     fetchData();
 });
 
+const slides = [
+    {
+        title: "Фулфилмент",
+        description: "Размещайте свои товары на наших складах",
+        image: fulfilmentSvg
+    },
+    {
+        title: "Биржа грузоперевозок",
+        description: "Перевозка и доставка груза по России",
+        image: birzhaSvg
+    },
+    {
+        title: "Фулфилмент",
+        description: "Размещайте свои товары на наших складах",
+        image: b2bSvg
+    },
+    {
+        title: "Биржа грузоперевозок",
+        description: "Перевозка и доставка груза по России",
+        image: birzhaFrilanceSvg
+    },
+    {
+        title: "Фулфилмент",
+        description: "Размещайте свои товары на наших складах",
+        image: electronTorgSvg
+    },
+    {
+        title: "Биржа грузоперевозок",
+        description: "Перевозка и доставка груза по России",
+        image: impotSvg
+    },
+    {
+        title: "Фулфилмент",
+        description: "Размещайте свои товары на наших складах",
+        image: socialBuisnessSvg
+    },
+    {
+        title: "Биржа грузоперевозок",
+        description: "Перевозка и доставка груза по России",
+        image: LearnMoreSvg
+    }
+];
+
 </script>
 
 <template>
@@ -79,65 +122,33 @@ onMounted(() => {
                     <p class="home__slider-subtitle subtitle">Инструмент для решения каждодневных задач.</p>
                 </div>
 
-                <swiper 
-                    :modules="modules"
-                    :navigation="{ 
-                        nextEl: '.intro__swiper-button-next', 
-                        prevEl: '.intro__swiper-button-prev' 
-                    }"
-                    :grab-cursor="true" 
-                    :slides-per-view="3" 
-                    :space-between="16" 
-                    @swiper="onSwiper"
-                @slideChange="onSlideChange"
-                >
+                <swiper :modules="modules" :navigation="{
+                    nextEl: '.intro__swiper-button-next',
+                    prevEl: '.intro__swiper-button-prev'
+                }" :grab-cursor="true" :slides-per-view="3" :space-between="16">
                     <swiper-slide>
-                        <introCard
-                        :image="fulfilmentSvg"
-                        title="Фулфилмент"
-                        description="Размещайте свои товары на наших складах"
-                        />
-                        <introCard
-                        :image="birzhaSvg"
-                        title="Биржа грузоперевозок"
-                        description="Перевозка и доставка груза по России"
-                        />
+                        <introCard :image="fulfilmentSvg" title="Фулфилмент"
+                            description="Размещайте свои товары на наших складах" />
+                        <introCard :image="birzhaSvg" title="Биржа грузоперевозок"
+                            description="Перевозка и доставка груза по России" />
                     </swiper-slide>
                     <swiper-slide>
-                        <introCard
-                        :image="b2bSvg"
-                        title="Фулфилмент"
-                        description="Размещайте свои товары на наших складах"
-                        />
-                        <introCard
-                        :image="birzhaFrilanceSvg"
-                        title="Биржа грузоперевозок"
-                        description="Перевозка и доставка груза по России"
-                        />
+                        <introCard :image="b2bSvg" title="Фулфилмент"
+                            description="Размещайте свои товары на наших складах" />
+                        <introCard :image="birzhaFrilanceSvg" title="Биржа грузоперевозок"
+                            description="Перевозка и доставка груза по России" />
                     </swiper-slide>
                     <swiper-slide>
-                        <introCard
-                        :image="electronTorgSvg"
-                        title="Фулфилмент"
-                        description="Размещайте свои товары на наших складах"
-                        />
-                        <introCard
-                        :image="impotSvg"
-                        title="Биржа грузоперевозок"
-                        description="Перевозка и доставка груза по России"
-                        />
+                        <introCard :image="electronTorgSvg" title="Фулфилмент"
+                            description="Размещайте свои товары на наших складах" />
+                        <introCard :image="impotSvg" title="Биржа грузоперевозок"
+                            description="Перевозка и доставка груза по России" />
                     </swiper-slide>
                     <swiper-slide>
-                        <introCard
-                        :image="socialBuisnessSvg"
-                        title="Фулфилмент"
-                        description="Размещайте свои товары на наших складах"
-                        />
-                        <introCard
-                        :image="LearnMoreSvg"
-                        title="Биржа грузоперевозок"
-                        description="Перевозка и доставка груза по России"
-                        />
+                        <introCard :image="socialBuisnessSvg" title="Фулфилмент"
+                            description="Размещайте свои товары на наших складах" />
+                        <introCard :image="LearnMoreSvg" title="Биржа грузоперевозок"
+                            description="Перевозка и доставка груза по России" />
                     </swiper-slide>
 
                     <div class="intro__swiper-button-next">
@@ -159,7 +170,6 @@ onMounted(() => {
                         </svg>
                     </div>
                 </swiper>
-
             </div>
         </div>
     </div>

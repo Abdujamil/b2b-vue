@@ -4,7 +4,7 @@ import './customCard.scss';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
-                    
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -21,26 +21,35 @@ defineProps({
 
 <template>
     <div class="b2b-card " v-if="customCard">
-        <div class="b2b-card__slide">
+        <div v-if="customCard.image == 1" class="b2b-card__slide">
+            <img :src="'https://market.b2b-se.com/components/com_jshopping/files/img_products/' + customCard.image" alt="img">
+        </div>
+
+        <div v-else  class="b2b-card__slide">
             <Swiper 
                 :modules="modules" 
                 :slides-per-view="1" 
                 :space-between="50" 
                 :pagination="{ clickable: true }"
-                @swiper="onSwiper" 
-                @slideChange="onSlideChange"
             >
-                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
-                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
-                <SwiperSlide><img :src="CardImg" alt="img" /></SwiperSlide>
+                <img 
+                v-if="customCard.image" 
+                :src="'https://market.b2b-se.com/components/com_jshopping/files/img_products/' + customCard.image" 
+                alt="img"
+                >
+                <img 
+                v-else src="https://market.b2b-se.com/components/com_jshopping/files/img_products/b2b_se_logo_full_blue.png" 
+                alt="Default Image"
+                >
             </Swiper>
         </div>
         <div class="b2b-card__title">
-            <h3>{{  typeof(customCard.alias_ru-RU) }}</h3>
-            <p>{{ typeof(customCard.description_ru-RU) }}</p>
+            <h3  v-if="customCard.image" >{{ customCard['alias_ru-RU'] }}</h3>
+            <h3  v-else > Без название </h3>
+            <p>{{ customCard['short_description_ru-RU'] }}</p>
         </div>
         <div class="b2b-card__card-price">
-            <h3>{{ customCard.product_price }} ₽<span>{{ customCard.product_old_price }}₽</span></h3>
+            <h3>{{ customCard['product_price'] }} ₽<span>{{ customCard['product_old_price'] }}₽</span></h3>
             <p>за 1 м</p>
         </div>
         <div class="b2b-card__card-km">
