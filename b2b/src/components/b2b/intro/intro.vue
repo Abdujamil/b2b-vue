@@ -24,31 +24,31 @@ import introCard from '@/components/b2b/intro/intro-card/introCard.vue';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-const cards = ref([]);
-const loading = ref(true);
+// const cards = ref([]);
+// const loading = ref(true);
 
-const fetchData = async () => {
-    try {
-        const response = await axios.request({
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
-            headers: {
-                'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
-                'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
-            }
-        });
-        cards.value = response.data;
-    } catch (error) {
-        console.error('Ошибка при загрузке данных:', error);
-    } finally {
-        loading.value = false;
-    }
-};
+// const fetchData = async () => {
+//     try {
+//         const response = await axios.request({
+//             method: 'get',
+//             maxBodyLength: Infinity,
+//             url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
+//             headers: {
+//                 'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
+//                 'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
+//             }
+//         });
+//         cards.value = response.data;
+//     } catch (error) {
+//         console.error('Ошибка при загрузке данных:', error);
+//     } finally {
+//         loading.value = false;
+//     }
+// };
 
-onMounted(() => {
-    fetchData();
-});
+// onMounted(() => {
+//     fetchData();
+// });
 
 const slides = [
     {

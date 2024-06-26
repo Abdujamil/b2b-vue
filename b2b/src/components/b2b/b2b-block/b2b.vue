@@ -5,7 +5,6 @@ import CustomBtn from '@/components/UIbuttons/customBtn/customBtn.vue';
 import './b2b.scss'
 import axios from 'axios';
 
-
 const cards = ref([]);
 const categories = ref([]);
 const loading = ref(true);
@@ -104,25 +103,26 @@ const birzhaLink = 'https://market.b2b-se.com/';
                      {{ category['name_ru-RU']  }}
                 </button>
 
+<<<<<<< HEAD
                 <!-- <button 
                 v-if="hasMoreButtons && !showAll" 
                 class="btn showMoreBtn" 
                 @click="toggleShowAll"
                 >
+=======
+                <button v-if="hasMoreButtons && !showAll" class="btn showMoreBtn" @click="toggleShowAll">
+>>>>>>> 9ebee8bc8be38655f355cacae6fd1931254d89af
                     Показать еще...
                 </button>
 
-                <button 
-                v-if="hasMoreButtons && showAll" 
-                class="btn filter-category" 
-                @click="toggleShowAll"
-                >
+                <button v-if="hasMoreButtons && showAll" class="btn filter-category" @click="toggleShowAll">
                     Скрыть
                 </button> -->
             </div>
 
             <div class="b2b-cards">
-                <CustomCard v-for="card in cards" :key="card.id" :customCard="card" />
+                <CustomCard v-for="(card, index) in cards" :key="index" :customCard="card" />
+                <!-- {{ cards[0].alias_ru_RU }} -->
             </div>
             <CustomBtn :href="birzhaLink" />
         </div>

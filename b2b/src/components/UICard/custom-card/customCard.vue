@@ -44,9 +44,14 @@ defineProps({
             </Swiper>
         </div>
         <div class="b2b-card__title">
+<<<<<<< HEAD
             <h3  v-if="customCard.image" >{{ customCard['alias_ru-RU'] }}</h3>
             <h3  v-else > Без название </h3>
             <p>{{ customCard['short_description_ru-RU'] }}</p>
+=======
+            <h3>{{ customCard.alias_ru_RU }}</h3>
+            <p>{{ customCard.description_ru_RU }}</p>
+>>>>>>> 9ebee8bc8be38655f355cacae6fd1931254d89af
         </div>
         <div class="b2b-card__card-price">
             <h3>{{ customCard['product_price'] }} ₽<span>{{ customCard['product_old_price'] }}₽</span></h3>
