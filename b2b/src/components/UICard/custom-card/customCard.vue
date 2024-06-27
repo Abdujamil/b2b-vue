@@ -2,9 +2,7 @@
 import CardImg from "@/assets/images/no-img.png";
 import './customCard.scss';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -16,45 +14,37 @@ defineProps({
         required: true
     }
 });
-
 </script>
 
 <template>
-    <div class="b2b-card " v-if="customCard">
-        <div v-if="customCard.image == 1" class="b2b-card__slide">
-            <img :src="'https://market.b2b-se.com/components/com_jshopping/files/img_products/' + customCard.image" alt="img">
-        </div>
-
-        <div v-else  class="b2b-card__slide">
+    <div class="b2b-card" v-if="customCard">
+        <div class="b2b-card__slide">
             <Swiper 
                 :modules="modules" 
                 :slides-per-view="1" 
                 :space-between="50" 
                 :pagination="{ clickable: true }"
             >
-                <img 
-                v-if="customCard.image" 
-                :src="'https://market.b2b-se.com/components/com_jshopping/files/img_products/' + customCard.image" 
-                alt="img"
-                >
-                <img 
-                v-else src="https://market.b2b-se.com/components/com_jshopping/files/img_products/b2b_se_logo_full_blue.png" 
-                alt="Default Image"
-                >
+                <SwiperSlide>
+                    <img 
+                        v-if="customCard.image" 
+                        :src="'https://market.b2b-se.com/components/com_jshopping/files/img_products/' + customCard.image" 
+                        alt="Product Image"
+                    >
+                    <img 
+                        v-else 
+                        src="https://market.b2b-se.com/components/com_jshopping/files/img_products/b2b_se_logo_full_blue.png" 
+                        alt="Default Image"
+                    >
+                </SwiperSlide>
             </Swiper>
         </div>
         <div class="b2b-card__title">
-<<<<<<< HEAD
-            <h3  v-if="customCard.image" >{{ customCard['alias_ru-RU'] }}</h3>
-            <h3  v-else > Без название </h3>
-            <p>{{ customCard['short_description_ru-RU'] }}</p>
-=======
-            <h3>{{ customCard.alias_ru_RU }}</h3>
-            <p>{{ customCard.description_ru_RU }}</p>
->>>>>>> 9ebee8bc8be38655f355cacae6fd1931254d89af
+            <h3>{{ customCard['alias_ru-RU'] || customCard['name'] || 'Без названия' }}</h3>
+            <p>{{ customCard['short_description_ru-RU'] || 'Описание отсутствует' }}</p>
         </div>
         <div class="b2b-card__card-price">
-            <h3>{{ customCard['product_price'] }} ₽<span>{{ customCard['product_old_price'] }}₽</span></h3>
+            <h3>{{ customCard['product_price'] || 'Цена не указана' }} ₽<span>{{ customCard['product_old_price'] || '' }}₽</span></h3>
             <p>за 1 м</p>
         </div>
         <div class="b2b-card__card-km">
@@ -64,3 +54,4 @@ defineProps({
         </div>
     </div>
 </template>
+

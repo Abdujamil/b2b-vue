@@ -2,128 +2,114 @@
 import { ref, computed, onMounted } from 'vue';
 import CustomCard from '@/components/UICard/custom-card/customCard.vue';
 import CustomBtn from '@/components/UIbuttons/customBtn/customBtn.vue';
-import './b2b.scss'
+import './b2b.scss';
 import axios from 'axios';
 
 const cards = ref([]);
 const categories = ref([]);
 const loading = ref(true);
+const activeButton = ref('Все рубрики');
+const selectedCategory = ref(null);
+const defaultLimit = 8; // Default limit for initial display
 
-const fetchData = async (url) => {
-  try {
-    const response = await axios.request({
+const fetchData = (url) => {
+  return new Promise((resolve, reject) => {
+    axios.request({
       method: 'get',
       maxBodyLength: Infinity,
       url: url,
       headers: {
-        'Authorization': 'Bearer FplEpXNhy6bB6zFB3MY5imiOONczyTNu',
-        'Cookie': '55e884495441419f79abfcee0eb88317=afd996b6e0110c80528334c19cf8a64a'
+        'Authorization': 'Bearer lZUD7zE3j89agd0N9BYI9dMZRyYxLkzd',
       }
+    }).then(response => {
+      resolve(response.data['result']);
+    }).catch(error => {
+      console.error('Error fetching data:', error);
+      reject(error);
     });
-
-    cards.value = response.data['result'];
-
-    categories.value = response.data['result'];
-
-    console.log(response.data)
-  } catch (error) {
-    console.error('Ошибка при загрузке данных:', error);
-  } finally {
-    loading.value = false;
-  }
+  });
 };
 
+const productsFetch = fetchData(`/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=${defaultLimit}`);
+const productsCategory = fetchData('/api/index.php?option=com_jshopping&controller=addon_api&section=category&task=list&args[limit]=10');
 
 onMounted(() => {
-  fetchData('/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=12');
-  fetchData('/api/index.php?option=com_jshopping&controller=addon_api&section=category&task=list&args[limit]=10');
+  Promise.all([productsFetch, productsCategory])
+    .then(results => {
+      console.log('Products:', results[0]);
+      console.log('Categories:', results[1]);
+      cards.value = results[0];
+      categories.value = results[1];
+      loading.value = false;
+    }).catch(error => {
+      console.error('Error loading data:', error);
+      loading.value = false;
+    });
 });
 
+const fetchFilteredCards = (categoryId) => {
+  loading.value = true;
 
-// const maxVisibleButtons = ref(12);
-// const buttons = ref([
-//     'Все рубрики',
-//     'Офис / Все для офиса',
-//     'Техника',
-//     'Строительство и ремонт',
-//     'Транспорт и логистика',
-//     'Безопасность',
-//     'Легкая промышленность',
-//     'Пищевая промышленность',
-//     'Электроэнергетика',
-//     'Металлургия',
-//     'Реклама'
-// ]);
+  const url = categoryId ? `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=search&args[categories][]=${categoryId}` : `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=${defaultLimit}`;
+  
+  Promise.all([url])
+  .then(result => {
+    cards.value = result;
+    loading.value = false;
+  }).catch(error => {
+    console.error('Error fetching filtered data:', error);
+    loading.value = false;
+  });
+  
+  fetchData(url)
+};
 
-const showAll = ref(false);
-const activeButton = ref('Все рубрики');  // По умолчанию активна первая кнопка
+function setActiveButton(category) {
+  activeButton.value = category['name_ru-RU'];
+  selectedCategory.value = category;
 
-// const visibleButtons = computed(() => {
-//     return showAll.value ? buttons.value : buttons.value.slice(0, maxVisibleButtons.value);
-// });
-
-// const hasMoreButtons = computed(() => {
-//     return buttons.value.length > maxVisibleButtons.value;
-// });
-
-// function toggleShowAll() {
-//     showAll.value = !showAll.value;
-// }
-
-function setActiveButton(button) {
-    activeButton.value = button;
+  fetchFilteredCards(category['category_id']);
+  // console.log(typeof (category['category_id']));
 }
 
 const birzhaLink = 'https://market.b2b-se.com/';
 </script>
 
-
 <template>
-    <div class="b2b">
-        <div class="b2b__container container">
-            <div class="b2b__title">
-                <h2 class="title">B2B Рынок</h2>
-                <p class="subtitle">Топ товаров по разделам.</p>
-            </div>
+  <div class="b2b">
+    <div class="b2b__container container">
+      <div class="b2b__title">
+        <h2 class="title">B2B Рынок</h2>
+        <p class="subtitle">Топ товаров по разделам.</p>
+      </div>
 
-            <div class="b2b__filter-categories">
-                <!-- <button v-for="(button, index) in visibleButtons" :key="index"
-                    :class="['btn', 'filter-category', { active: activeButton === button }]"
-                    @click="setActiveButton(button)">
-                    {{ button }}
-                </button> -->
+      <div class="b2b__filter-categories">
+        <button v-for="(category, index) in categories" 
+          :data-id="category['category_id']"
+          :key="index" 
+          :class="['btn', 'filter-category', { active: activeButton === category['name_ru-RU'] }]" 
+          @click="setActiveButton(category)">
+          {{ category['name_ru-RU'] }}
+        </button>
+      </div>
 
-                <button
-                v-for="(category, index) in categories"
-                :key="index"
-                :class="['btn', 'filter-category', 
-                { active: activeButton === category }]"
-                @click="setActiveButton(category)"
-                >
-                     {{ category['name_ru-RU']  }}
-                </button>
+      <div class="b2b-cards" v-if="!loading">
+        <template v-if="cards">
+          <CustomCard v-for="(card, index) in cards" :key="index" :customCard="card" />
+        </template>
+      </div>
 
-                <!-- <button 
-                v-if="hasMoreButtons && !showAll" 
-                class="btn showMoreBtn" 
-                @click="toggleShowAll"
-                >
-                    Показать еще...
-                </button>
+      <div class="loading" v-else>Загрузка...</div>
 
-                <button v-if="hasMoreButtons && showAll" class="btn filter-category" @click="toggleShowAll">
-                    Скрыть
-                </button> -->
-            </div>
-
-            <div class="b2b-cards">
-                <CustomCard v-for="(card, index) in cards" :key="index" :customCard="card" />
-                <!-- {{ cards[0].alias_ru_RU }} -->
-            </div>
-            <CustomBtn :href="birzhaLink" />
-        </div>
+      <CustomBtn :href="birzhaLink" />
     </div>
-
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.loading{
+  height: 200px;
+  width: 100%;
+}
+</style>
