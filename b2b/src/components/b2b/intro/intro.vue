@@ -24,56 +24,30 @@ import introCard from '@/components/b2b/intro/intro-card/introCard.vue';
 
 const modules = [Navigation, Pagination, Scrollbar, A11y];
 
-// const cards = ref([]);
-// const loading = ref(true);
-
-// const fetchData = async () => {
-//     try {
-//         const response = await axios.request({
-//             method: 'get',
-//             maxBodyLength: Infinity,
-//             url: '/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=20',
-//             headers: {
-//                 'Authorization': 'Bearer z8NQIIfEd882hvkP83WoOPJEqfCxMu42',
-//                 'Cookie': '55e884495441419f79abfcee0eb88317=050cb5ef2d9397eb2cd7dc471bc260c8'
-//             }
-//         });
-//         cards.value = response.data;
-//     } catch (error) {
-//         console.error('Ошибка при загрузке данных:', error);
-//     } finally {
-//         loading.value = false;
-//     }
-// };
-
-// onMounted(() => {
-//     fetchData();
-// });
-
 const slides = [
     {
-        title: "Фулфилмент",
-        description: "Размещайте свои товары на наших складах",
+        title: "B2B Рынок",
+        description: "Купля / продажа товаров для бизнеса",
         image: fulfilmentSvg
     },
     {
-        title: "Биржа грузоперевозок",
-        description: "Перевозка и доставка груза по России",
+        title: "ЭДО + онлайн сервисы",
+        description: "Электронные доверенности / Проверка контрагентов",
         image: birzhaSvg
     },
     {
-        title: "Фулфилмент",
-        description: "Размещайте свои товары на наших складах",
+        title: "Электронные тендеры",
+        description: "Просто / Быстро / Выгодно",
         image: b2bSvg
     },
     {
-        title: "Биржа грузоперевозок",
-        description: "Перевозка и доставка груза по России",
+        title: "Соцсеть для бизнеса",
+        description: "Станьте участником крупнейшей сети сообщества",
         image: birzhaFrilanceSvg
     },
     {
-        title: "Фулфилмент",
-        description: "Размещайте свои товары на наших складах",
+        title: "Биржа фриланса",
+        description: "Находите исполнителей и заказчиков. Безопасные сделки",
         image: electronTorgSvg
     },
     {
@@ -82,16 +56,17 @@ const slides = [
         image: impotSvg
     },
     {
-        title: "Фулфилмент",
-        description: "Размещайте свои товары на наших складах",
+        title: "Российский IT-продукт",
+        description: "IT-компания, аккредитованная в реестре Минцифры",
         image: socialBuisnessSvg
     },
     {
-        title: "Биржа грузоперевозок",
-        description: "Перевозка и доставка груза по России",
+        title: "Узнать больше",
+        description: "Откройте для себя все возможности нашего сервиса и станьте частью бизнес-экосистемы.",
         image: LearnMoreSvg
     }
 ];
+
 
 </script>
 
@@ -126,29 +101,15 @@ const slides = [
                     nextEl: '.intro__swiper-button-next',
                     prevEl: '.intro__swiper-button-prev'
                 }" :grab-cursor="true" :slides-per-view="3" :space-between="16">
-                    <swiper-slide>
-                        <introCard :image="fulfilmentSvg" title="Фулфилмент"
-                            description="Размещайте свои товары на наших складах" />
-                        <introCard :image="birzhaSvg" title="Биржа грузоперевозок"
-                            description="Перевозка и доставка груза по России" />
-                    </swiper-slide>
-                    <swiper-slide>
-                        <introCard :image="b2bSvg" title="Фулфилмент"
-                            description="Размещайте свои товары на наших складах" />
-                        <introCard :image="birzhaFrilanceSvg" title="Биржа грузоперевозок"
-                            description="Перевозка и доставка груза по России" />
-                    </swiper-slide>
-                    <swiper-slide>
-                        <introCard :image="electronTorgSvg" title="Фулфилмент"
-                            description="Размещайте свои товары на наших складах" />
-                        <introCard :image="impotSvg" title="Биржа грузоперевозок"
-                            description="Перевозка и доставка груза по России" />
-                    </swiper-slide>
-                    <swiper-slide>
-                        <introCard :image="socialBuisnessSvg" title="Фулфилмент"
-                            description="Размещайте свои товары на наших складах" />
-                        <introCard :image="LearnMoreSvg" title="Биржа грузоперевозок"
-                            description="Перевозка и доставка груза по России" />
+
+
+                    <swiper-slide v-for="(slide, index) in slides" :key="index">
+                        <introCard :link="slide.link" :image="slide.image" :title="slide.title"
+                            :description="slide.description" 
+                        />
+                        <introCard :link="slide.link" :image="slide.image" :title="slide.title"
+                            :description="slide.description" 
+                        />
                     </swiper-slide>
 
                     <div class="intro__swiper-button-next">
@@ -176,4 +137,18 @@ const slides = [
 </template>
 
 
-<style scoped></style>
+<style scoped>
+.b2b__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.b2b__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+</style>

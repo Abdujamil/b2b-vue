@@ -10,7 +10,7 @@ const categories = ref([]);
 const loading = ref(true);
 const activeButton = ref('Все рубрики');
 const selectedCategory = ref(null);
-const defaultLimit = 8; // Default limit for initial display
+const defaultLimit = 8; 
 
 const fetchData = (url) => {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,7 @@ const fetchData = (url) => {
       maxBodyLength: Infinity,
       url: url,
       headers: {
-        'Authorization': 'Bearer lZUD7zE3j89agd0N9BYI9dMZRyYxLkzd',
+        'Authorization': 'Bearer SZ03zsgPUevBp1o8iOJYZSt0WRWPc8o8',
       }
     }).then(response => {
       resolve(response.data['result']);
@@ -36,7 +36,9 @@ const productsCategory = fetchData('/api/index.php?option=com_jshopping&controll
 onMounted(() => {
   Promise.all([productsFetch, productsCategory])
     .then(results => {
-      console.log('Products:', results[0]);
+      console.log('Products:', results[0], 
+        'Product_ID', results[0]['3']['product_id']
+      );
       console.log('Categories:', results[1]);
       cards.value = results[0];
       categories.value = results[1];
@@ -50,26 +52,35 @@ onMounted(() => {
 const fetchFilteredCards = (categoryId) => {
   loading.value = true;
 
-  const url = categoryId ? `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=search&args[categories][]=${categoryId}` : `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=${defaultLimit}`;
-  
-  Promise.all([url])
-  .then(result => {
-    cards.value = result;
-    loading.value = false;
-  }).catch(error => {
-    console.error('Error fetching filtered data:', error);
-    loading.value = false;
-  });
+  const url = categoryId ? 
+    `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=search&args[categories][]=${categoryId}` : `/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=${defaultLimit}`;
   
   fetchData(url)
+    .then(result => {
+      if (Array.isArray(result)) {
+        result.forEach((item, index) => {
+          if (typeof item !== 'object') {
+            console.error(`Item at index ${index} is not an object:`, item);
+          }
+        });
+      }
+      
+      cards.value = result['products']; 
+      // console.log(result['products']);
+      loading.value = false;
+    })
+    .catch(error => {
+      console.error('Error fetching filtered data:', error);
+      loading.value = false;
+    });
 };
 
 function setActiveButton(category) {
   activeButton.value = category['name_ru-RU'];
   selectedCategory.value = category;
 
-  fetchFilteredCards(category['category_id']);
-  // console.log(typeof (category['category_id']));
+  fetchFilteredCards(category['category_parent_id']);
+  // console.log(category['category_parent_id']);
 }
 
 const birzhaLink = 'https://market.b2b-se.com/';
@@ -85,7 +96,7 @@ const birzhaLink = 'https://market.b2b-se.com/';
 
       <div class="b2b__filter-categories">
         <button v-for="(category, index) in categories" 
-          :data-id="category['category_id']"
+          :data-id="category['category_parent_id']"
           :key="index" 
           :class="['btn', 'filter-category', { active: activeButton === category['name_ru-RU'] }]" 
           @click="setActiveButton(category)">
@@ -98,6 +109,7 @@ const birzhaLink = 'https://market.b2b-se.com/';
           <CustomCard v-for="(card, index) in cards" :key="index" :customCard="card" />
         </template>
       </div>
+      
 
       <div class="loading" v-else>Загрузка...</div>
 
