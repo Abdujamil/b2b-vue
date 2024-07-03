@@ -19,7 +19,7 @@ const fetchData = (url) => {
       maxBodyLength: Infinity,
       url: url,
       headers: {
-        'Authorization': 'Bearer SZ03zsgPUevBp1o8iOJYZSt0WRWPc8o8',
+        'Authorization': 'Bearer JOTPLtopM2z8OF4Q8QQSxgAY1fL52qn3',
       }
     }).then(response => {
       resolve(response.data['result']);
@@ -31,13 +31,13 @@ const fetchData = (url) => {
 };
 
 const productsFetch = fetchData(`/api/index.php?option=com_jshopping&controller=addon_api&section=product&task=list&args[limit]=${defaultLimit}`);
-const productsCategory = fetchData('/api/index.php?option=com_jshopping&controller=addon_api&section=category&task=list&args[limit]=10');
+const productsCategory = fetchData('/api/index.php?option=com_jshopping&controller=addon_api&section=category&task=list&args');
 
 onMounted(() => {
   Promise.all([productsFetch, productsCategory])
     .then(results => {
       console.log('Products:', results[0], 
-        'Product_ID', results[0]['3']['product_id']
+        'Product_ID', results[1]['2']['category_parent_id']
       );
       console.log('Categories:', results[1]);
       cards.value = results[0];
@@ -66,7 +66,7 @@ const fetchFilteredCards = (categoryId) => {
       }
       
       cards.value = result['products']; 
-      // console.log(result['products']);
+      console.log(result);
       loading.value = false;
     })
     .catch(error => {
@@ -80,7 +80,7 @@ function setActiveButton(category) {
   selectedCategory.value = category;
 
   fetchFilteredCards(category['category_parent_id']);
-  // console.log(category['category_parent_id']);
+  console.log(category['category_parent_id'] === 0);
 }
 
 const birzhaLink = 'https://market.b2b-se.com/';
@@ -95,13 +95,28 @@ const birzhaLink = 'https://market.b2b-se.com/';
       </div>
 
       <div class="b2b__filter-categories">
-        <button v-for="(category, index) in categories" 
+        <!-- <button v-for="(category, index) in categories" 
           :data-id="category['category_parent_id']"
           :key="index" 
           :class="['btn', 'filter-category', { active: activeButton === category['name_ru-RU'] }]" 
           @click="setActiveButton(category)">
-          {{ category['name_ru-RU'] }}
-        </button>
+          <div v-if="category['category_parent_id'] === 0">
+             {{ category['name_ru-RU'] }}
+          </div>
+          <div v-else>
+            {{ category['name_ru-RU'] }}
+          </div>
+        </button> -->
+
+        <div v-for="(category, index) in categories" :key="index">
+          <button  
+          v-if="category['category_parent_id'] === 0" 
+          :class="['btn', 'filter-category', { active: activeButton === category['name_ru-RU'] }]" 
+          @click="setActiveButton(category)"
+          >
+            {{ category['name_ru-RU'] }}
+          </button>
+        </div>
       </div>
 
       <div class="b2b-cards" v-if="!loading">
