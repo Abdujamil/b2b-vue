@@ -50,15 +50,15 @@
   }
 } */
 
-:root{
+:root {
   --bg-black-body: #1e2b3e;
-  --bg-grey-body: #F3F8FF;
-  --color-text-grey: #92A3BC;
-  --color-text-dark: #1E2B3E;
-  --color-btn-green: #00B066;
-  --border: 1px solid #BDCCE2;
+  --bg-grey-body: #f3f8ff;
+  --color-text-grey: #92a3bc;
+  --color-text-dark: #1e2b3e;
+  --color-btn-green: #00b066;
+  --border: 1px solid #bdcce2;
 
-  --box-shadow-btn: 0px 20px 32px -12px rgba(0,222,129,0.24);
+  --box-shadow-btn: 0px 20px 32px -12px rgba(0, 222, 129, 0.24);
 }
 
 *,
@@ -79,7 +79,7 @@
 
 body {
   font-family: 'Inter-Medium';
-  background-color: #F3F8FF;
+  background-color: #f3f8ff;
 }
 
 .container {
@@ -100,62 +100,62 @@ body {
   font-size: 1.2rem;
   max-width: 720px;
   line-height: 28px;
-  margin-top: 24px;  
+  margin-top: 24px;
 }
 
-a{
+a {
   color: #fff;
   text-decoration: none;
 }
-ul li{
+ul li {
   list-style: none;
 }
 
 .birzha-trading-btns {
   width: 100%;
   max-width: 520px;
-  border: 1px #BDCCE2 solid;
+  border: 1px #bdcce2 solid;
   border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
   margin: 52px 0;
 }
-  
-  .trade-btn {
-      font-size: .9em;
-      font-family: "Inter-Medium";
-      border-color: transparent;
-      background-color: transparent;
-      padding: 1.2rem;
-      border-radius: 8px;
-      width: 260px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
 
-      &.active {
-          color: #fff;
-          background-color: #00b066;
+.trade-btn {
+  font-size: 0.9em;
+  font-family: 'Inter-Medium';
+  border-color: transparent;
+  background-color: transparent;
+  padding: 1.2rem;
+  border-radius: 8px;
+  width: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
-          svg path {
-              fill: #fff;
-          }
+  &.active {
+    color: #fff;
+    background-color: #00b066;
 
-          span {
-              color: #fff;
-          }
-      }
+    svg path {
+      fill: #fff;
+    }
 
-      svg {
-          margin-right: 6px;
-          width: 18px;
-          height: 18px;
-      }
-
-      span {
-          margin-left: 4px;
-          color: #1E2B3E;
-      }
+    span {
+      color: #fff;
+    }
   }
+
+  svg {
+    margin-right: 6px;
+    width: 18px;
+    height: 18px;
+  }
+
+  span {
+    margin-left: 4px;
+    color: #1e2b3e;
+  }
+}

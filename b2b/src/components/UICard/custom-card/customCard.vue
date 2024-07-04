@@ -15,6 +15,11 @@ defineProps({
     }
 });
 </script>
+<!-- 
+<div class="home_body_btns invite_text">
+    <h2 class="title"> Приглашаем поставщиков к сотрудничеству! </h2>
+ <h2 class="title"> Регистрируйте свою компанию и продавайте товары и услуги в нашей бизнес-экосистеме.</h2>
+</div> -->
 
 <template>
         <div class="b2b-card" v-if="customCard">
